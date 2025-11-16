@@ -1,0 +1,69 @@
+@use '../core/tokens' as *;
+
+// 버튼 기본 스타일
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $font-weight-medium;
+  border-radius: $border-radius-md;
+  transition: all $transition-fast;
+  white-space: nowrap;
+  user-select: none;
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// 버튼 variants
+.btn--primary {
+  background-color: $color-primary;
+  color: $color-background;
+
+  &:hover:not(:disabled) {
+    background-color: $color-primary-hover;
+  }
+
+  &:active:not(:disabled) {
+    background-color: $color-primary-active;
+  }
+}
+
+.btn--secondary {
+  background-color: $color-secondary;
+  color: $color-background;
+
+  &:hover:not(:disabled) {
+    background-color: $color-secondary-hover;
+  }
+
+  &:active:not(:disabled) {
+    background-color: $color-secondary-active;
+  }
+}
+
+// 버튼 sizes
+.btn--sm {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  height: 2rem;
+}
+
+.btn--md {
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-md;
+  height: 2.5rem;
+}
+
+.btn--lg {
+  padding: $spacing-sm $spacing-lg;
+  font-size: $font-size-lg;
+  height: 3rem;
+}

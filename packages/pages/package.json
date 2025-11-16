@@ -1,0 +1,44 @@
+{
+  "name": "@jbeat/pages",
+  "version": "0.1.0",
+  "private": false,
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/es/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/es/index.mjs",
+      "require": "./dist/cjs/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc --project tsconfig.build.json",
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "pnpm test:unit",
+    "test:unit": "jest",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@jbeat/uikit": "workspace:*",
+    "zustand": "^5.0.2",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "identity-obj-proxy": "^3.0.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
