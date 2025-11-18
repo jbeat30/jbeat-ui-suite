@@ -22,12 +22,12 @@ const TextInput = ({ label, errorMessage, className, id, ...restProps }: TextInp
   const hasError = Boolean(errorMessage);
 
   // 컨테이너 클래스명 조합함
-  const containerClassNames = ['input', hasError && 'input--error', className]
+  const classNames = ['input', hasError && 'input--error', className]
     .filter(Boolean)
     .join(' ');
 
   return (
-    <div className={containerClassNames}>
+    <div className={classNames}>
       {label && (
         <label htmlFor={inputId} className="input__label">
           {label}
