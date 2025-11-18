@@ -87,11 +87,52 @@ const pages = [
 
 #### 단계 5: 외부 export 추가
 
-`src/index.ts` 파일을 열고 페이지를 export:
+**5-1. React/Next.js용 export (`src/index.ts`)**
 
 ```tsx
 export { MyPage, type MyPageProps } from './my-page';
 ```
+
+**5-2. CDN용 export (`src/runtime.ts`)**
+
+```tsx
+// 1. 상단에 import 추가 (as로 이름 변경하여 export와 충돌 방지)
+import { MyPage as MyPageComponent } from './my-page';
+import type { MyPageProps } from './my-page';
+
+// 2. pages 객체에 추가 (자동으로 window.JBeatPages에 등록됨)
+const pages = {
+  consultation: ConsultationPageComponent,
+  myPage: MyPageComponent,  // ← 추가
+} as const;
+
+// 3. 타입 추가
+type PageTypeMap = {
+  consultation: { render: (options: RenderOptions<ConsultationPageProps>) => void };
+  myPage: { render: (options: RenderOptions<MyPageProps>) => void };  // ← 추가
+};
+
+// 4. ESM/CJS export 추가
+// PascalCase를 사용하여 페이지임을 표현
+export const MyPage = createPageExport(MyPageComponent);
+```
+
+**사용 예시:**
+
+```typescript
+// CDN에서
+window.JBeatPages.myPage.render({ ... });
+
+// ESM/CJS에서
+import { MyPage } from '@jbeat/pages/runtime';
+MyPage.render({ target: '#app', props: {...} });
+```
+
+**왜 이렇게 나눠서 관리하나?**
+
+- `index.ts` (React/Next.js용): 컴포넌트 자체를 export함
+- `runtime.ts` (CDN용): 컴포넌트의 render 메서드만 export함
+- 이렇게 하면 각 사용 환경에 맞는 최적의 방식으로 제공할 수 있음
 
 ## 외부에서 사용하기
 
@@ -170,6 +211,59 @@ React가 없는 일반 HTML 페이지에서도 CDN을 통해 사용할 수 있�
 - 각 페이지는 `render()` 메서드로 렌더링함
 - `target`: CSS 셀렉터 또는 HTMLElement
 - `props`: 페이지 컴포넌트에 전달할 props
+
+#### CDN 동작 원리
+
+CDN을 통해 페이지를 렌더링하는 과정을 단계별로 설명:
+
+```html
+<!-- 1단계: HTML에 빈 div 요소를 준비 -->
+<div id="app"></div>
+
+<!-- 2단계: CDN에서 runtime.js를 로드 -->
+<!-- 이 스크립트가 로드되면 window.JBeatPages 객체가 생성됨 -->
+<script src="https://cdn.../runtime.js"></script>
+
+<script>
+  // 3단계: render() 함수 호출
+  window.JBeatPages.consultation.render({
+    target: '#app',  // ← 여기서 타겟 ID를 넘김!
+    props: { ... }
+  });
+</script>
+```
+
+**내부 동작 과정:**
+
+1. **target 파라미터 처리**
+   - `target: '#app'`을 받으면 `document.querySelector('#app')`으로 DOM에서 요소를 찾음
+   - HTML에 이미 존재하는 `<div id="app">`를 찾아서 가져옴
+   - 즉, 비어있는 div를 찾아서 그 안에 React 컴포넌트를 채워넣음
+
+2. **React 컴포넌트 렌더링**
+   - `createRoot(element)`: 찾은 DOM 요소를 React가 관리하는 "루트"로 변환함
+   - `createElement(PageComponent, props)`: React 컴포넌트를 React 엘리먼트로 변환함
+   - `root.render(...)`: React 엘리먼트를 실제 DOM에 렌더링함
+
+3. **결과**
+   ```html
+   <!-- 렌더링 전 -->
+   <div id="app"></div>
+
+   <!-- 렌더링 후 -->
+   <div id="app">
+     <!-- ConsultationPage 컴포넌트의 HTML이 여기에 삽입됨 -->
+     <div class="consultation-page">
+       <form>...</form>
+     </div>
+   </div>
+   ```
+
+**핵심 개념:**
+- **target은 이미 HTML에 존재하는 요소임**: 비어있는 div를 미리 만들어놓고, 그 안에 React 컴포넌트를 채워넣는 방식
+- **document.querySelector**: JavaScript의 기본 API로, CSS 셀렉터로 DOM 요소를 찾음
+- **createRoot**: React 18의 API로, DOM 요소를 React 앱의 진입점으로 만듦
+- **render**: React 컴포넌트를 실제 HTML로 변환하여 DOM에 삽입함
 
 ## 주요 개념
 
