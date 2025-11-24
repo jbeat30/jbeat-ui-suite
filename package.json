@@ -5,9 +5,9 @@
   "scripts": {
     "dev:uikit": "turbo run storybook --filter=@jbeat/uikit",
     "dev:pages": "turbo run dev --filter=@jbeat/pages",
-    "build": "turbo run build",
-    "build:uikit": "turbo run build --filter=@jbeat/uikit",
-    "build:pages": "turbo run build --filter=@jbeat/pages",
+    "build": "turbo run lint && turbo run test && turbo run build",
+    "build:uikit": "turbo run lint --filter=@jbeat/uikit && turbo run test --filter=@jbeat/uikit && turbo run build --filter=@jbeat/uikit",
+    "build:pages": "turbo run lint --filter=@jbeat/pages && turbo run test --filter=@jbeat/pages && turbo run build --filter=@jbeat/pages",
     "lint": "turbo run lint",
     "lint:uikit": "turbo run lint --filter=@jbeat/uikit",
     "lint:pages": "turbo run lint --filter=@jbeat/pages",
