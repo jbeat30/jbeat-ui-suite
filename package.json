@@ -18,9 +18,14 @@
     "test:pages": "turbo run test --filter=@jbeat/pages",
     "test:e2e": "turbo run test:e2e",
     "test:uikit:e2e": "turbo run test:e2e --filter=@jbeat/uikit",
-    "test:pages:e2e": "turbo run test:e2e --filter=@jbeat/pages"
+    "test:pages:e2e": "turbo run test:e2e --filter=@jbeat/pages",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "pnpm build && changeset publish",
+    "release:dev": "pnpm build && changeset publish --tag next"
   },
   "devDependencies": {
+    "@changesets/cli": "2.29.7",
     "@playwright/test": "1.56.1",
     "@types/jest": "29.5.14",
     "@types/node": "22.19.1",
