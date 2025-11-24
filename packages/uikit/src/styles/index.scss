@@ -1,0 +1,7 @@
+// Core styles
+@use './core/reset';
+@use './core/globals';
+
+// Component styles
+@use './components/button';
+@use './components/input';
