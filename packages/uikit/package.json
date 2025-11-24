@@ -20,7 +20,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc --project tsconfig.build.json",
-    "lint": "eslint src --ext .ts,.tsx",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\"",
+    "lint": "pnpm format && eslint src --ext .ts,.tsx",
     "test": "pnpm test:unit",
     "test:unit": "jest",
     "storybook": "storybook dev -p 6006",
@@ -38,15 +39,15 @@
     "@storybook/react": "8.6.14",
     "@storybook/react-vite": "8.6.14",
     "@storybook/test": "8.6.14",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.0",
     "eslint-plugin-storybook": "0.11.1",
-    "identity-obj-proxy": "^3.0.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "sass": "^1.83.0",
+    "identity-obj-proxy": "3.0.0",
+    "jest-environment-jsdom": "29.7.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "sass": "1.94.0",
     "storybook": "8.6.14",
-    "vite-plugin-dts": "^4.3.0"
+    "vite-plugin-dts": "4.5.4"
   }
 }
