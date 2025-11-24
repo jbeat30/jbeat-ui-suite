@@ -1,7 +1,11 @@
 {
   "name": "@jbeat/uikit",
   "version": "0.1.0",
+  "description": "React 19 UI component library with TypeScript and SCSS",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/cjs/index.cjs",
   "module": "dist/es/index.mjs",
   "types": "dist/types/index.d.ts",
