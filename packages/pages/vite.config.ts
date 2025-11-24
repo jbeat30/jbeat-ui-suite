@@ -27,10 +27,12 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      formats: ['es', 'cjs'],
+      name: 'JBeatPages',
+      formats: ['es', 'cjs', 'umd'],
       fileName: (format) => {
         if (format === 'es') return 'es/index.mjs';
         if (format === 'cjs') return 'cjs/index.cjs';
+        if (format === 'umd') return 'umd/index.js';
         return `${format}/index.js`;
       },
     },
@@ -40,6 +42,10 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'jsxRuntime',
+          '@jbeat/uikit': 'JBeatUIKit',
+          zustand: 'zustand',
+          zod: 'zod',
         },
         assetFileNames: 'pages.[ext]',
       },

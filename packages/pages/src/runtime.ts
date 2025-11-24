@@ -91,10 +91,10 @@ if (typeof window !== 'undefined') {
 
   (Object.keys(pages) as Array<keyof typeof pages>).forEach((pageName) => {
     const PageComponent = pages[pageName];
+    type Props = ExtractProps<typeof PageComponent>;
 
-    // @typescript-eslint/no-explicit-any
-    (window.JBeatPages as any)[pageName] = {
-      render: (options: RenderOptions<any>) => renderPage(PageComponent, options),
+    (window.JBeatPages as Record<string, unknown>)[pageName] = {
+      render: (options: RenderOptions<Props>) => renderPage(PageComponent, options),
     };
   });
 }

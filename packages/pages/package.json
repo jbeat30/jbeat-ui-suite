@@ -1,15 +1,22 @@
 {
   "name": "@jbeat/pages",
   "version": "0.1.0",
+  "description": "Pre-built React page components with CDN runtime support",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/cjs/index.cjs",
   "module": "dist/es/index.mjs",
   "types": "dist/types/index.d.ts",
+  "unpkg": "dist/umd/index.js",
+  "jsdelivr": "dist/umd/index.js",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
       "import": "./dist/es/index.mjs",
-      "require": "./dist/cjs/index.cjs"
+      "require": "./dist/cjs/index.cjs",
+      "default": "./dist/es/index.mjs"
     }
   },
   "files": [
