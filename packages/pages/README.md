@@ -27,13 +27,13 @@ packages/pages/
 pnpm dev
 ```
 
-브라우저에서 `http://localhost:5173` (또는 표시된 포트)를 열면 안내 페이지가 나타남
+브라우저에서 안내 페이지 확인 가능
 
 ### 2. 새로운 페이지 추가하기
 
 #### 단계 1: 페이지 폴더 생성
 
-`src/[페이지명]` 폴더를 만들고 다음과 같은 구조로 개발:
+`src/[페이지명]` 폴더를 만들고 다음과 같은 구조로 개발
 
 ```
 src/my-page/
@@ -44,11 +44,11 @@ src/my-page/
 └── index.ts              # export
 ```
 
-**중요**: 페이지 컴포넌트는 완전히 독립적이어야 함. 외부 레이아웃의 영향을 받지 않아야 함
+**중요**: 페이지 컴포넌트는 완전히 독립적이어야 함 (외부 레이아웃의 영향을 받지 않음)
 
 #### 단계 2: 라우트 추가
 
-`src/app/App.tsx` 파일을 열고 라우트를 추가:
+`src/app/App.tsx` 파일을 열고 라우트를 추가
 
 ```tsx
 import { MyPage } from '../my-page';
@@ -59,7 +59,7 @@ import { MyPage } from '../my-page';
 
 #### 단계 3: 네비게이션 추가
 
-`src/app/components/Navigation.tsx` 파일을 열고 네비게이션 링크를 추가:
+`src/app/components/Navigation.tsx` 파일을 열고 네비게이션 링크를 추가
 
 ```tsx
 const navItems: NavItem[] = [
@@ -70,7 +70,7 @@ const navItems: NavItem[] = [
 
 #### 단계 4: 홈 페이지에 페이지 정보 추가
 
-`src/app/pages/Home.tsx` 파일을 열고 페이지 정보를 추가:
+`src/app/pages/Home.tsx` 파일을 열고 페이지 정보를 추가
 
 ```tsx
 const pages = [
@@ -138,7 +138,7 @@ MyPage.render({ target: '#app', props: {...} });
 
 ### React/Next.js 프로젝트에서 사용
 
-다른 프로젝트에서 페이지 컴포넌트를 독립적으로 사용할 수 있음:
+다른 프로젝트에서 페이지 컴포넌트를 독립적으로 사용 가능
 
 ```tsx
 import { ConsultationPage } from '@jbeat/pages';
@@ -159,7 +159,7 @@ function App() {
 
 ### CDN으로 사용 (정적 HTML)
 
-React가 없는 일반 HTML 페이지에서도 CDN을 통해 사용할 수 있음:
+React가 없는 일반 HTML 페이지에서도 CDN을 통해 사용 가능
 
 ```html
 <!DOCTYPE html>
@@ -214,7 +214,7 @@ React가 없는 일반 HTML 페이지에서도 CDN을 통해 사용할 수 있�
 
 #### CDN 동작 원리
 
-CDN을 통해 페이지를 렌더링하는 과정을 단계별로 설명:
+CDN을 통해 페이지를 렌더링하는 과정을 단계별로 설명
 
 ```html
 <!-- 1단계: HTML에 빈 div 요소를 준비 -->
@@ -227,7 +227,7 @@ CDN을 통해 페이지를 렌더링하는 과정을 단계별로 설명:
 <script>
   // 3단계: render() 함수 호출
   window.JBeatPages.consultation.render({
-    target: '#app',  // ← 여기서 타겟 ID를 넘김!
+    target: '#app',  // 여기서 타겟 ID를 넘김
     props: { ... }
   });
 </script>
@@ -238,7 +238,7 @@ CDN을 통해 페이지를 렌더링하는 과정을 단계별로 설명:
 1. **target 파라미터 처리**
    - `target: '#app'`을 받으면 `document.querySelector('#app')`으로 DOM에서 요소를 찾음
    - HTML에 이미 존재하는 `<div id="app">`를 찾아서 가져옴
-   - 즉, 비어있는 div를 찾아서 그 안에 React 컴포넌트를 채워넣음
+   - 비어있는 div를 찾아서 그 안에 React 컴포넌트를 채워넣음
 
 2. **React 컴포넌트 렌더링**
    - `createRoot(element)`: 찾은 DOM 요소를 React가 관리하는 "루트"로 변환함
@@ -267,8 +267,8 @@ CDN을 통해 페이지를 렌더링하는 과정을 단계별로 설명:
 
 ## 주요 개념
 
-- **개발용 앱 (`src/app/`)**: 개발 시에만 사용되며 외부로 export되지 않음. 페이지들을 테스트하고 미리보기 위한 용도임. 네비게이션이 포함되어 있음
-- **페이지 컴포넌트 (`src/[페이지명]/`)**: 실제 재사용 가능한 페이지 컴포넌트임. **완전히 독립적**이며 외부 레이아웃의 영향을 받지 않음. 외부로 export됨
+- **개발용 앱 (`src/app/`)**: 개발 시에만 사용되며 외부로 export되지 않음 (페이지들을 테스트하고 미리보기 위한 용도, 네비게이션 포함)
+- **페이지 컴포넌트 (`src/[페이지명]/`)**: 실제 재사용 가능한 페이지 컴포넌트로, 완전히 독립적이며 외부 레이아웃의 영향을 받지 않음 (외부로 export됨)
 - **메인 페이지**: 안내 페이지로, 사용 가능한 페이지 목록을 보여줌
 - **네비게이션**: 개발용 앱에만 존재하며, 페이지 간 이동을 위한 메뉴를 제공함
 

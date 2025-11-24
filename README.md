@@ -1,11 +1,10 @@
 # jbeat-ui-suite
 
-jbeat-ui-suite는 React 19 기반의 UI 컴포넌트 라이브러리와 다양한 페이지를 제공하는 **모노레포 프로젝트**입니다.
-모노레포 처음이라 정확하지 않을 수 있지만, 최대한 쉽게 설명하려 노력했습니다.
+React 19 기반의 UI 컴포넌트 라이브러리와 다양한 페이지를 제공하는 **모노레포 프로젝트**
 
 ## 📦 모노레포(Monorepo)란?
 
-**하나의 저장소**에서 **여러 독립적인 패키지**를 관리하는 구조입니다.
+**하나의 저장소**에서 **여러 독립적인 패키지**를 관리하는 구조
 
 ### 장점
 -  **코드 공유**: uikit → pages로 컴포넌트 재사용
@@ -73,7 +72,7 @@ pnpm install
 
 ### 명령어 실행 방법
 
-모노레포에서는 **두 가지 방법**으로 명령어를 실행할 수 있습니다:
+모노레포에서는 **두 가지 방법**으로 명령어를 실행할 수 있음
 
 #### 방법 1: 패키지 폴더에서 실행
 ```bash
@@ -92,7 +91,6 @@ pnpm -F @jbeat/uikit storybook
 # 방법 1: 폴더 이동 후 실행
 cd packages/uikit
 pnpm storybook
-# → http://localhost:6006
 
 # 방법 2: 루트에서 실행
 pnpm -F @jbeat/uikit storybook
@@ -219,7 +217,7 @@ function App() {
 ```tsx
 // 특정 페이지만 사용
 import { ConsultationPage } from '@jbeat/pages';
-// UIKit 스타일은 자동으로 로드됨!
+// UIKit 스타일은 자동으로 로드됨
 
 function App() {
   const handleSubmit = async (data) => {
@@ -235,7 +233,7 @@ function App() {
 // UIKit + Pages 함께 사용
 import { Button } from '@jbeat/uikit';
 import { ConsultationPage } from '@jbeat/pages';
-// UIKit 스타일은 자동으로 로드됨!
+// UIKit 스타일은 자동으로 로드됨
 
 function App() {
   return (
@@ -261,7 +259,7 @@ function App() {
   </head>
   <body>
     <div id="app"></div>
-    
+
     <!-- Pages JavaScript -->
     <script src="https://cdn.../pages.js"></script>
     <script>
@@ -327,7 +325,7 @@ export type { CheckboxProps } from './shared/ui/checkbox';
 ```bash
 cd packages/uikit
 pnpm storybook
-# → http://localhost:6006에서 새 컴포넌트 확인!
+# 브라우저에서 새 컴포넌트 확인
 ```
 
 ### 새로운 Page 추가
@@ -387,7 +385,7 @@ window.JBeatPages.signup = {
 ### 테스트
 - **Unit 테스트**: 모든 컴포넌트에 필수
 - **E2E 테스트**: 주요 사용자 플로우에 필수
-- **실행 전**: `pnpm test`, `pnpm test:e2e` 모두 통과 필수
+- **배포 전**: `pnpm test`, `pnpm test:e2e` 모두 통과 확인
 
 ## 🎯 핵심 요약
 
@@ -398,10 +396,10 @@ window.JBeatPages.signup = {
 pnpm install                          # 의존성 설치
 
 # 컴포넌트 개발
-cd packages/uikit && pnpm storybook   # Storybook 실행 → localhost:6006
+cd packages/uikit && pnpm storybook   # Storybook 실행
 
 # 페이지 개발
-cd packages/pages && pnpm dev         # Dev 서버 실행 → localhost:5173
+cd packages/pages && pnpm dev         # Dev 서버 실행
 
 # 배포 전
 pnpm lint                             # Lint 검사
@@ -422,3 +420,12 @@ pnpm build                            # 전체 빌드
 | E2E 테스트 | `packages/pages/tests/e2e/` | `pnpm test:e2e` |
 
 ---
+
+## License
+This project is under the MIT License.  
+You may use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.
+
+Original copyright notice and license text
+**must be included** in all copies or substantial portions of the Software.
+
+Contributions are welcome via Pull Requests.
