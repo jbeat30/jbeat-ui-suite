@@ -177,10 +177,15 @@ jbeat-ui-suite/                      ← 루트 (모노레포)
 │   └── pages/                       ← @jbeat/pages 패키지
 │       ├── src/
 │       │   ├── consultation/        # 상담 페이지 모듈
-│       │   │   ├── entities/       # 타입 정의
-│       │   │   ├── features/       # 폼 로직 + UI
-│       │   │   └── pages/          # 페이지 컴포넌트
-│       │   ├── main.tsx            # 개발용 네비게이션
+│       │   │   ├── __tests__/      # 테스트 파일
+│       │   │   ├── lib/            # 유틸리티 (validation)
+│       │   │   ├── model/          # Zustand 스토어
+│       │   │   ├── styles/         # SCSS 스타일
+│       │   │   ├── ui/             # UI 컴포넌트
+│       │   │   ├── types.ts        # 타입 정의
+│       │   │   └── index.ts        # 모듈 진입점
+│       │   ├── app/                # 개발용 네비게이션 앱 (외부 export 안됨)
+│       │   ├── main.tsx            # 개발용 진입점
 │       │   ├── index.ts            # npm 진입점
 │       │   └── runtime.ts          # CDN 진입점
 │       ├── tests/e2e/              # E2E 테스트
