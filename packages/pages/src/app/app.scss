@@ -1,0 +1,11 @@
+/**
+ * 개발용 앱 스타일
+ * 실제 페이지 컴포넌트에는 영향을 주지 않음
+ */
+
+.dev-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8fafc;
+}
