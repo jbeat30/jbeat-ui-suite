@@ -28,9 +28,7 @@ function ConsultationPage({
 
         {/* 푸터 섹션 */}
         <footer className="consultation-page__footer">
-          <p className="consultation-page__footer-text">
-            문의사항이 있으시면 언제든지 연락주세요
-          </p>
+          <p className="consultation-page__footer-text">문의사항이 있으시면 언제든지 연락주세요</p>
         </footer>
       </main>
     </div>

@@ -104,11 +104,7 @@ describe('TextInput', () => {
 
   it('모든 요소가 함께 렌더링됨', () => {
     render(
-      <TextInput
-        label="이름"
-        placeholder="이름을 입력하세요"
-        errorMessage="이름은 필수입니다"
-      />
+      <TextInput label="이름" placeholder="이름을 입력하세요" errorMessage="이름은 필수입니다" />
     );
 
     expect(screen.getByText('이름')).toBeInTheDocument();

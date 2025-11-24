@@ -36,8 +36,7 @@ const renderPage = <TProps extends object>(
   // 1단계: target 요소 찾기
   // - target이 string이면: CSS 셀렉터로 DOM에서 요소를 찾음 (예: '#app', '.container')
   // - target이 HTMLElement면: 이미 DOM 요소이므로 그대로 사용함
-  const element =
-    typeof target === 'string' ? document.querySelector<HTMLElement>(target) : target;
+  const element = typeof target === 'string' ? document.querySelector<HTMLElement>(target) : target;
 
   // 2단계: 요소가 없으면 에러 발생
   // - 사용자가 잘못된 셀렉터를 입력했거나, HTML에 해당 요소가 없을 때
@@ -93,6 +92,7 @@ if (typeof window !== 'undefined') {
   (Object.keys(pages) as Array<keyof typeof pages>).forEach((pageName) => {
     const PageComponent = pages[pageName];
 
+    // @typescript-eslint/no-explicit-any
     (window.JBeatPages as any)[pageName] = {
       render: (options: RenderOptions<any>) => renderPage(PageComponent, options),
     };

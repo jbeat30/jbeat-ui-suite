@@ -11,10 +11,7 @@ export const consultationFormSchema = z.object({
     .min(2, '이름은 최소 2자 이상이어야 합니다')
     .max(50, '이름은 50자를 초과할 수 없습니다'),
 
-  email: z
-    .string()
-    .min(1, '이메일을 입력해주세요')
-    .email('올바른 이메일 형식이 아닙니다'),
+  email: z.string().min(1, '이메일을 입력해주세요').email('올바른 이메일 형식이 아닙니다'),
 
   phone: z
     .string()
