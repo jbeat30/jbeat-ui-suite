@@ -53,7 +53,7 @@ function App() {
 
 | Prop      | Type                              | Default     | 설명           |
 | --------- | --------------------------------- | ----------- | -------------- |
-| variant   | 'primary' \| 'secondary' \| 'text' | 'primary'   | 버튼 스타일    |
+| variant   | 'primary' \| 'secondary'           | 'primary'   | 버튼 스타일    |
 | size      | 'sm' \| 'md' \| 'lg'               | 'md'        | 버튼 크기      |
 | disabled  | boolean                           | false       | 비활성화 여부  |
 | onClick   | () => void                        | -           | 클릭 이벤트    |
@@ -70,7 +70,7 @@ function App() {
   Secondary 버튼
 </Button>
 
-<Button variant="text" size="sm" disabled>
+<Button variant="primary" size="sm" disabled>
   비활성화 버튼
 </Button>
 ```
@@ -81,28 +81,28 @@ function App() {
 
 **Props:**
 
-| Prop        | Type                              | Default | 설명               |
-| ----------- | --------------------------------- | ------- | ------------------ |
-| label       | string                            | -       | 입력 필드 레이블   |
-| placeholder | string                            | ''      | Placeholder 텍스트 |
-| value       | string                            | -       | 입력 값            |
-| onChange    | (e: ChangeEvent) => void          | -       | 변경 이벤트        |
-| error       | string                            | -       | 에러 메시지        |
-| required    | boolean                           | false   | 필수 입력 여부     |
-| disabled    | boolean                           | false   | 비활성화 여부      |
+| Prop         | Type                              | Default | 설명               |
+| ------------ | --------------------------------- | ------- | ------------------ |
+| label        | string                            | -       | 입력 필드 레이블   |
+| placeholder  | string                            | ''      | Placeholder 텍스트 |
+| value        | string                            | -       | 입력 값            |
+| onChange     | (e: ChangeEvent) => void          | -       | 변경 이벤트        |
+| errorMessage | string                            | -       | 에러 메시지        |
+| required     | boolean                           | false   | 필수 입력 여부     |
+| disabled     | boolean                           | false   | 비활성화 여부      |
 
 **예제:**
 
 ```tsx
 const [name, setName] = useState('');
-const [error, setError] = useState('');
+const [errorMessage, setErrorMessage] = useState('');
 
 <TextInput
   label="사용자 이름"
   placeholder="이름을 입력하세요"
   value={name}
   onChange={(e) => setName(e.target.value)}
-  error={error}
+  errorMessage={errorMessage}
   required
 />
 ```

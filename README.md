@@ -47,7 +47,7 @@ jbeat-ui-suite/              ← 하나의 저장소 (Monorepo)
 
 - **Framework**: React 19 (jsx-runtime)
 - **Language**: TypeScript (strict mode)
-- **Monorepo**: pnpm workspaces
+- **Monorepo**: pnpm workspaces + Turborepo
 - **Build**: Vite
 - **Styling**: SCSS
 - **State**: Zustand
@@ -184,10 +184,9 @@ jbeat-ui-suite/                      ← 루트 (모노레포)
 │       │   │   ├── ui/             # UI 컴포넌트
 │       │   │   ├── types.ts        # 타입 정의
 │       │   │   └── index.ts        # 모듈 진입점
-│       │   ├── app/                # 개발용 네비게이션 앱 (외부 export 안됨)
+│       │   ├── app/                # 개발용 네비게이션 앱
 │       │   ├── main.tsx            # 개발용 진입점
-│       │   ├── index.ts            # npm 진입점
-│       │   └── runtime.ts          # CDN 진입점
+│       │   └── index.ts            # 패키지 진입점
 │       ├── tests/e2e/              # E2E 테스트
 │       ├── package.json            # Pages 독립 패키지
 │       └── playwright.config.ts
@@ -205,7 +204,7 @@ jbeat-ui-suite/                      ← 루트 (모노레포)
 ```tsx
 // UIKit만 사용
 import { Button, TextInput } from '@jbeat/uikit';
-import '@jbeat/uikit/dist/styles.css';
+import '@jbeat/uikit/styles.css';
 
 function App() {
   return (
@@ -248,41 +247,6 @@ function App() {
     </div>
   );
 }
-```
-
-### 2. CDN 사용 (정적 HTML)
-
-```html
-<!-- UIKit + Pages 사용 -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <!-- UIKit 스타일 -->
-    <link rel="stylesheet" href="https://cdn.../uikit.css" />
-    <!-- Pages 전용 스타일 -->
-    <link rel="stylesheet" href="https://cdn.../pages.css" />
-  </head>
-  <body>
-    <div id="app"></div>
-
-    <!-- Pages JavaScript -->
-    <script src="https://cdn.../pages.js"></script>
-    <script>
-      JBeatPages.consultation.render({
-        target: '#app',
-        props: {
-          onSubmit: async (data) => {
-            console.log('제출:', data);
-            await fetch('/api/consultation', {
-              method: 'POST',
-              body: JSON.stringify(data),
-            });
-          },
-        },
-      });
-    </script>
-  </body>
-</html>
 ```
 
 ## 📚 확장 가이드
@@ -338,12 +302,13 @@ pnpm storybook
 1. **페이지 폴더 생성**
 ```bash
 packages/pages/src/signup/
-├── entities/application/types.ts
-├── features/signup-form/
-│   ├── lib/validation.ts
-│   ├── model/useSignupFormStore.ts
-│   └── ui/SignupForm.tsx
-└── pages/SignupPage.tsx
+├── __tests__/          # 테스트
+├── lib/                # validation 등
+├── model/              # Zustand 스토어
+├── styles/             # SCSS 스타일
+├── ui/                 # UI 컴포넌트
+├── types.ts            # 타입 정의
+└── index.ts            # export
 ```
 
 2. **Export 추가**
@@ -352,21 +317,12 @@ packages/pages/src/signup/
 export { SignupPage, type SignupPageProps } from './signup';
 ```
 
-3. **개발용 네비게이션 추가**
+3. **개발용 앱에 추가**
 ```tsx
-// packages/pages/src/main.tsx에 링크 추가
-<li><a href="#signup">회원가입</a></li>
+// packages/pages/src/app/App.tsx에 라우트 추가
+import { SignupPage } from '../signup';
 
-// 조건부 렌더링 추가
-{currentPage === 'signup' && <SignupPage onSubmit={handleSubmit} />}
-```
-
-4. **CDN 등록 (선택사항)**
-```ts
-// packages/pages/src/runtime.ts
-window.JBeatPages.signup = {
-  render: (options) => renderPage(SignupPage, options),
-};
+<Route path="/signup" element={<SignupPage />} />
 ```
 
 ## 📝 코드 규칙
