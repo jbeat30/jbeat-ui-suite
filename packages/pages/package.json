@@ -2,14 +2,14 @@
   "name": "@jbeat/pages",
   "version": "0.1.0",
   "private": false,
-  "main": "dist/cjs/index.cjs",
-  "module": "dist/es/index.mjs",
+  "main": "dist/umd/index.js",
+  "module": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/es/index.mjs",
-      "require": "./dist/cjs/index.cjs"
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/umd/index.js"
     }
   },
   "files": [
@@ -17,7 +17,9 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc --project tsconfig.build.json",
+    "build:esm": "vite build --mode esm",
+    "build:umd": "vite build --mode umd",
+    "build": "pnpm build:esm && pnpm build:umd && tsc --project tsconfig.build.json",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\"",
     "lint": "pnpm format && eslint src --ext .ts,.tsx",
     "test": "pnpm test:unit",
