@@ -7,10 +7,11 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      formats: ['es', 'cjs'],
+      name: 'JBeatUIKit',
+      formats: ['es', 'umd'],
       fileName: (format) => {
-        if (format === 'es') return 'es/index.mjs';
-        if (format === 'cjs') return 'cjs/index.cjs';
+        if (format === 'es') return 'esm/index.mjs';
+        if (format === 'umd') return 'umd/index.js';
         return `${format}/index.js`;
       },
     },
@@ -20,6 +21,7 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'ReactJSXRuntime',
         },
       },
     },
