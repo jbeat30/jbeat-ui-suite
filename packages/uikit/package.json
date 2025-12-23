@@ -19,7 +19,9 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc --project tsconfig.build.json",
+    "build:esm": "vite build --mode esm",
+    "build:umd": "vite build --mode umd",
+    "build": "pnpm build:esm && pnpm build:umd && tsc --project tsconfig.build.json",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\"",
     "lint": "pnpm format && eslint src --ext .ts,.tsx",
     "test": "pnpm test:unit",
