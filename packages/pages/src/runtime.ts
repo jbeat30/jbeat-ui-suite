@@ -73,7 +73,7 @@ const pages = {
 type ExtractProps<T> = T extends ComponentType<infer P> ? P : never;
 
 type PageTypeMap = {
-  [K in keyof typeof pages]: {
+  -readonly [K in keyof typeof pages]: {
     render: (options: RenderOptions<ExtractProps<(typeof pages)[K]>>) => void;
   };
 };
@@ -89,12 +89,14 @@ declare global {
 if (typeof window !== 'undefined') {
   window.JBeatPages = window.JBeatPages ?? ({} as PageTypeMap);
 
-  (Object.keys(pages) as Array<keyof typeof pages>).forEach((pageName) => {
-    const PageComponent = pages[pageName];
+  const pageEntries = Object.entries(pages) as {
+    [K in keyof typeof pages]: [K, (typeof pages)[K]];
+  }[keyof typeof pages][];
 
-    // @typescript-eslint/no-explicit-any
-    (window.JBeatPages as any)[pageName] = {
-      render: (options: RenderOptions<any>) => renderPage(PageComponent, options),
+  pageEntries.forEach(([pageName, PageComponent]) => {
+    window.JBeatPages![pageName] = {
+      render: (options: RenderOptions<ExtractProps<typeof PageComponent>>) =>
+        renderPage(PageComponent, options),
     };
   });
 }
